@@ -27,6 +27,8 @@ int is_palindrome(listint_t **head)
 	len = len / 2;
 
 	for (i = 1; i < len; i++)
+		middle = middle->next;
+	if (len % 2 != 0 && len != 1)
 	{
 		middle = middle->next;
 		len = len - 1;
