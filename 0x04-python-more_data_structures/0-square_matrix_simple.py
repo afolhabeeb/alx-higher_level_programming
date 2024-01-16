@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
 def square_matrix_simple(matrix=[]):
-    squared_mat = [[0] * len(matrix[0]) for _ in range(len(matrix))]
+    squared_mat = []
 
-    for num in range(len(matrix)):
-        for nums in range(len(matrix[0])):
-            squared_mat[num][nums] = matrix [num][nums] ** 2
+    for row in matrix:
+        squared_row = [num**2 for num in row]
+        squared_mat.append(squared_row)
     return (squared_mat)
