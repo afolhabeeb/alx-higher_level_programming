@@ -1,0 +1,1 @@
+This is the task where I learnt the Pytho exceptions. Understood the difference between errors and exceptions; what exceptions are, how to use them, how to correctly handle an exxception and the purpose of catching an exception
