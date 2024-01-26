@@ -1,1 +1,1 @@
-This directory house the task on the Python import and modules
+This is the file directory for the Python - import and modules project.
