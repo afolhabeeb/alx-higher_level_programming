@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 
+"""Define a MagicClass matching exactly a bytecode provided by Holberton."""
+
 import math
 
-"""Define a MagicClass matching exactly a bytecode provided by Holberton."""
 
 class MagicClass:
     """Represent a circle."""
