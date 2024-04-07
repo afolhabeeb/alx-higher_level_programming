@@ -1,55 +1,36 @@
-#!/usr/bin/python3
-""" Module to print status code """
-
+#!/usr/bin/env python3
 
 import sys
 
-
-def print_info():
-    print('File size: {:d}'.format(file_size))
-
-    for scode, code_times in sorted(status_codes.items()):
-        if code_times > 0:
-            print('{}: {:d}'.format(scode, code_times))
-
-
-status_codes = {
-    '200': 0,
-    '301': 0,
-    '400': 0,
-    '401': 0,
-    '403': 0,
-    '404': 0,
-    '405': 0,
-    '500': 0
-}
-
-lc = 0
-file_size = 0
+# Initialize variables to store metrics
+total_file_size = 0
+status_code_counts = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
 
 try:
-    for line in sys.stdin:
-        if lc != 0 and lc % 10 == 0:
-            print_info()
+    # Read lines from stdin
+    for line_number, line in enumerate(sys.stdin, start=1):
+        # Parse each line according to the input format
+        parts = line.split()
+        file_size = int(parts[-1])
+        status_code = int(parts[-2])
 
-        pieces = line.split()
+        # Update total file size
+        total_file_size += file_size
 
-        try:
-            status = int(pieces[-2])
+        # Update status code counts
+        if status_code in status_code_counts:
+            status_code_counts[status_code] += 1
 
-            if str(status) in status_codes.keys():
-                status_codes[str(status)] += 1
-        except Exception:
-            pass
+        # Print statistics every 10 lines
+        if line_number % 10 == 0:
+            print(f"File size: {total_file_size}")
+            for code, count in sorted(status_code_counts.items()):
+                if count > 0:
+                    print(f"{code}: {count}")
 
-        try:
-            file_size += int(pieces[-1])
-        except Exception:
-            pass
-
-        lc += 1
-
-    print_info()
 except KeyboardInterrupt:
-    print_info()
-    raise
+    # Handle KeyboardInterrupt (Ctrl+C)
+    print(f"File size: {total_file_size}")
+    for code, count in sorted(status_code_counts.items()):
+        if count > 0:
+            print(f"{code}: {count}")
